@@ -1,11 +1,11 @@
-const OFF = 0
-const WARN = 1
-const ERROR = 2
+const OFF = 0;
+const WARN = 1;
+const ERROR = 2;
 
 module.exports = {
   env: {
     browser: true,
-    es2020: true,
+    es2021: true,
     node: true,
   },
   extends: [
@@ -20,12 +20,13 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
+      impliedStrict: true,
       jsx: true,
     },
-    ecmaVersion: 11,
+    ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', 'unicorn', 'promise', '@typescript-eslint'],
+  plugins: ['react', 'unicorn', 'promise', '@typescript-eslint', 'prettier'],
   settings: {
     'import/resolver': {
       node: {
@@ -105,7 +106,7 @@ module.exports = {
     // indent: [ERROR, 2, { SwitchCase: 1 }],
     'linebreak-style': [ERROR, 'unix'],
     quotes: [ERROR, 'single'],
-    // semi: [ERROR, 'always'],
+    semi: [ERROR, 'always'],
     'no-unused-expressions': WARN,
     'no-plusplus': OFF,
     'no-console': OFF,
@@ -115,6 +116,5 @@ module.exports = {
     'no-use-before-define': OFF,
     'no-restricted-syntax': OFF,
     'no-continue': OFF,
-    'unicorn/prefer-module': OFF,
   },
-}
+};

@@ -1,35 +1,20 @@
-import React, { useState, Suspense, lazy } from 'react'
+import React from 'react';
+import Header from 'Components/Header';
+import './App.scss';
 
-import HelloWorld from './page/helloWorld'
-
-const Demo1 = lazy(() => import('Components/Demo1'))
-const Demo2 = lazy(() => import('Components/Demo2'))
-const Demo3 = lazy(() => import('Components/Demo3'))
-
-interface Props {
-  title: string
+interface IProps {
+  name: string;
+  age: number;
 }
 
-function App(props: Props) {
-  const [showDemo2, setShowDemo2] = useState(false)
-  const { title } = props
+function App(props: IProps) {
+  const { name, age } = props;
   return (
-    <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <p>{title}</p>
-
-        <Demo1 />
-
-        {showDemo2 && <Demo2 />}
-
-        <p onClick={() => setShowDemo2(!showDemo2)}>show Demo2</p>
-
-        <Demo3 />
-      </Suspense>
-
-      <HelloWorld />
+    <div className='app'>
+      <Header />
+      <span>{`Hello! I'm ${name}, ${age} yearssss old.`}</span>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

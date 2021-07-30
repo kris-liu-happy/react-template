@@ -1,41 +1,49 @@
-const { merge } = require('webpack-merge')
-const common = require('./webpack.common.js')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const common = require('./webpack.common.js');
+const paths = require('../paths');
+const { shouldOpenAnalyzer, ANALYZER_HOST, ANALYZER_PORT } = require('../conf');
 
 module.exports = merge(common, {
   mode: 'production',
   devtool: false,
-  plugins: [new CleanWebpackPlugin(), new MiniCssExtractPlugin()],
+  target: 'browserslist',
+  output: {
+    filename: 'js/[name].[contenthash:8].js',
+    path: paths.appBuild,
+    assetModuleFilename: 'images/[name].[contenthash:8].[ext]',
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash:8].css',
+      chunkFilename: 'css/[name].[contenthash:8].chunk.css',
+    }),
+    shouldOpenAnalyzer &&
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerHost: ANALYZER_HOST,
+        analyzerPort: ANALYZER_PORT,
+      }),
+  ].filter(Boolean),
   optimization: {
-    // 第三方依赖打出来独立 chunk
-    splitChunks: {
-      chunks: 'all',
-      name(module, chunks, cacheGroupKey) {
-        const moduleFileName = module
-          .identifier()
-          .split('/')
-          .reduceRight((item) => item)
-        const allChunksNames = chunks.map((item) => item.name).join('~')
-        return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`
-      },
-    },
-    // true 压缩js 代码
     minimize: true,
     minimizer: [
-      // js压缩
       new TerserPlugin({
-        // extractComments 设为 false 意味着去除所有注释，除了有特殊标记的注释，比如 @preserve 标记
         extractComments: false,
         terserOptions: {
-          // pure_funcs 可以设置我们想要去除的函数，比如我就将代码中所有 console.log 去除
           compress: { pure_funcs: ['console.log'] },
         },
       }),
-      // css 压缩
-      new OptimizeCSSAssetsPlugin(),
-    ].filter(Boolean),
+      new CssMinimizerPlugin(),
+    ],
+    splitChunks: {
+      chunks: 'all',
+      minSize: 0,
+    },
   },
-})
+});

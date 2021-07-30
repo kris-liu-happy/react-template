@@ -1,10 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './app'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-// 实现局部刷新
 if (module && module.hot) {
-  module.hot.accept()
+  module.hot.accept();
 }
 
-ReactDOM.render(<App title='helloworld11' />, document.querySelector('#root'))
+ReactDOM.render(<App name='vortesnail' age={25} />, document.querySelector('#root'));

@@ -1,7 +1,0 @@
-:global(.demo1_global) {
-  color: red;
-}
-
-:local(.demo1) {
-  color: aqua;
-}
