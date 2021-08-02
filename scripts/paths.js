@@ -34,6 +34,7 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appIndex: resolveModule(resolveApp, 'src/index'), // Package entry path
+  // appIndex: resolveModule(resolveApp, 'src/app'), // Package entry path
   appHtml: resolveApp('public/index.html'),
   appNodeModules: resolveApp('node_modules'), // node_modules path
   appSrc: resolveApp('src'),

@@ -1,5 +1,5 @@
 {
-  "name": "react-ts-quick-starter",
+  "name": "react-ts-template-w5",
   "version": "2.0.0",
   "description": "Quickly create react17 + webpack5 + typescript project environment.",
   "main": "index.js",
@@ -36,25 +36,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vortesnail/react-ts-quick-starter.git"
+    "url": "git+https://github.com/kris-liu-happy/react-ts-template.git"
   },
   "keywords": [
     "react-project",
     "typescript-project",
     "react-typescript",
-    "react-ts-quick-starter",
     "webpack5"
   ],
   "author": {
     "name": "vortesnail",
-    "url": "https://github.com/vortesnail",
-    "email": "1091331061@qq.com"
+    "url": "https://github.com/kris-liu-happy",
+    "email": "kris.liu.6@qq.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vortesnail/react-ts-quick-starter/issues"
+    "url": "https://github.com/kris-liu-happy/react-ts-template/issues"
   },
-  "homepage": "https://github.com/vortesnail/react-ts-quick-starter#readme",
+  "homepage": "https://github.com/vortesnail/react-ts-template#readme",
   "devDependencies": {
     "@babel/core": "^7.13.13",
     "@babel/plugin-transform-runtime": "^7.13.10",
